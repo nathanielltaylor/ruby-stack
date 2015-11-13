@@ -10,6 +10,13 @@ describe Stack do
       stack.push(Time.now)
       stack.push(3.14159)
     end
+
+    it 'raises an exception if the stack is already full' do
+      100.times do
+        stack.push("value")
+      end
+      expect { stack.push("another value") }.to raise_error(StackOverflow)
+    end
   end
 
   describe '#empty?' do

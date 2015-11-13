@@ -1,6 +1,9 @@
 class StackUnderflow < StandardError
 end
 
+class StackOverflow < StandardError
+end
+
 class Stack
   def initialize
     @contents = []
@@ -8,6 +11,7 @@ class Stack
   end
 
   def push(item)
+    raise StackOverflow if full?
     @index += 1
     @contents[@index] = item
   end
@@ -24,6 +28,10 @@ class Stack
   end
 
   def empty?
-    @index == 0
+    @index <= 0
+  end
+
+  def full?
+    @index >= 100
   end
 end
